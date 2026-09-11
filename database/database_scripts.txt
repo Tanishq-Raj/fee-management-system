@@ -1,0 +1,73 @@
+Create Tables:
+CREATE TABLE Students (
+    StudentID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL,
+    Course NVARCHAR(100) NOT NULL,
+    TotalFee DECIMAL(10,2) NOT NULL,
+    PaidAmount DECIMAL(10,2) NOT NULL DEFAULT 0,
+    DueDate DATE NOT NULL
+);
+
+CREATE TABLE Administrators (
+    AdminID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Role NVARCHAR(50) NOT NULL
+);
+
+Sample Data:
+INSERT INTO dbo.Students (Name, Email, Course, TotalFee, PaidAmount, DueDate)
+VALUES
+('Vivek Sharma',      'vivek.sharma24@gmail.com',      'Electronics',             122000,  92000, '2026-09-08'),
+('Riya Patel',        'riya.patel26@gmail.com',        'Civil Engineering',       128000, 126000, '2026-09-10'),
+('Kabir Mehta',       'kabir.mehta25@gmail.com',       'Mechanical Engineering',  117000,  72000, '2026-09-06'),
+('Simran Joshi',      'simran.joshi27@gmail.com',      'Computer Science',        112000, 109000, '2026-09-04'),
+('Akshay Kulkarni',   'akshay.kulkarni23@gmail.com',   'Artificial Intelligence', 108000,  63000, '2026-09-02'),
+('Nisha Singh',       'nisha.singh26@gmail.com',       'Information Technology',  102000,  42000, '2026-09-07'),
+('Rohit Verma',       'rohit.verma24@gmail.com',       'Electronics',             123000, 121000, '2026-09-03'),
+('Anaya Desai',       'anaya.desai25@gmail.com',       'Mechanical Engineering',  127000,  88000, '2026-09-09'),
+('Kunal Shah',        'kunal.shah27@gmail.com',       'Computer Science',        118000, 114000, '2026-09-05'),
+('Pallavi Nair',      'pallavi.nair24@gmail.com',      'Artificial Intelligence', 111000,  57000, '2026-09-01'),
+('Vishal Rao',        'vishal.rao26@gmail.com',        'Civil Engineering',       107000, 104000, '2026-09-08'),
+('Ishita Gupta',      'ishita.gupta25@gmail.com',      'Information Technology',  101000,  32000, '2026-09-04'),
+('Aman Kapoor',       'aman.kapoor23@gmail.com',       'Mechanical Engineering',  121000, 101000, '2026-09-10'),
+('Maya Iyer',         'maya.iyer27@gmail.com',         'Electronics',             126000, 124000, '2026-09-02'),
+('Saurabh Jain',      'saurabh.jain24@gmail.com',      'Artificial Intelligence', 116000,  97000, '2026-09-06'),
+('Kriti Reddy',       'kriti.reddy26@gmail.com',       'Computer Science',        113000,  52000, '2026-09-03'),
+('Harsh Agarwal',     'harsh.agarwal25@gmail.com',     'Information Technology',  106000,  81000, '2026-09-07'),
+('Nandini Choudhary', 'nandini.choudhary23@gmail.com', 'Civil Engineering',       103000,  98000, '2026-09-05'),
+('Yuvraj Patil',      'yuvraj.patil27@gmail.com',      'Electronics',             119000,  67000, '2026-09-09'),
+('Diya Malhotra',     'diya.malhotra24@gmail.com',     'Computer Science',        129000, 112000, '2026-09-01');
+
+INSERT INTO dbo.Administrators (Name, Role)
+VALUES
+('Ajay Sharma', 'Accounts Officer'),
+('Priya Kumar', 'Finance Manager'),
+('Sanjay Bhansali', 'System Administrator');
+
+Automate email query for FeeReminderLogicApp
+SELECT
+    StudentID,
+    Name,
+    Email,
+    TotalFee,
+    PaidAmount,
+    DueDate
+FROM dbo.Students
+WHERE PaidAmount < TotalFee
+  AND DueDate < GETDATE();
+
+Get Students Query 
+SELECT
+    StudentID,
+    Name,
+    TotalFee,
+    PaidAmount,
+    DueDate
+FROM dbo.Students
+WHERE StudentID = ?;
+
+Update Fee Query
+UPDATE dbo.Students
+SET PaidAmount = ?
+WHERE StudentID = ?;

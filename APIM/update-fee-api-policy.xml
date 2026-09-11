@@ -1,0 +1,25 @@
+﻿<policies>
+    <inbound>
+        <base />
+        <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized - Valid Microsoft Entra token required" require-scheme="Bearer">
+            <openid-config url="https://login.microsoftonline.com/e6227d08-d0a7-4bef-8c44-b1bbeb6aa0e6/v2.0/.well-known/openid-configuration" />
+            <audiences>
+                <audience>286be363-b0b1-4b50-9460-a4504760be43</audience>
+            </audiences>
+            <required-claims>
+                <claim name="roles" match="any">
+                    <value>Admin</value>
+                </claim>
+            </required-claims>
+        </validate-jwt>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>

@@ -1,0 +1,7 @@
+# Note: The Fee Management System backend runs on Node.js (v18+) Azure Functions.
+# All application dependencies are managed via package.json using npm:
+#   - @azure/functions (^4.5.0)
+#   - mssql (^11.0.1)
+#
+# To install dependencies for this project, run:
+#   npm install

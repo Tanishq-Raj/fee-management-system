@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Fee Management System - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-area">
+                <div class="logo-icon">🎓</div>
+                <div>
+                    <h1>Azure Fee Management System</h1>
+                    <p class="subtitle">Cloud-Native Student Fee Portal &bull; Secured with Microsoft Entra ID & APIM</p>
+                </div>
+            </div>
+            <div class="connection-status">
+                <span class="status-dot"></span>
+                <span>APIM Connected</span>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <main class="dashboard-grid">
+            <!-- Left Card: Search & Student Info -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>🔍 Check Student Payment Status</h2>
+                    <span class="badge badge-public">GET API</span>
+                </div>
+                <div class="card-body">
+                    <form id="search-form" class="form-group">
+                        <label for="student-id-input">Enter Student ID</label>
+                        <div class="input-with-button">
+                            <input type="number" id="student-id-input" placeholder="e.g. 1, 2, 3" min="1" required value="1">
+                            <button type="submit" id="search-btn" class="btn btn-primary">
+                                <span class="btn-text">Check Status</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Student Details Result Card -->
+                    <div id="student-result" class="result-box hidden">
+                        <div class="result-header">
+                            <div>
+                                <h3 id="res-name">Student Name</h3>
+                                <p id="res-id" class="text-muted">Student ID: #1</p>
+                            </div>
+                            <span id="res-badge" class="badge">Status</span>
+                        </div>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="stat-label">Total Tuition Fee</span>
+                                <span id="res-total" class="stat-value">₹0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">Amount Paid</span>
+                                <span id="res-paid" class="stat-value text-success">₹0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">Remaining Balance</span>
+                                <span id="res-balance" class="stat-value text-danger">₹0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">Due Date</span>
+                                <span id="res-duedate" class="stat-value">YYYY-MM-DD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Card: Admin Fee Update -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>💳 Update Fee Payment (Admin)</h2>
+                    <span class="badge badge-admin">PUT API (RBAC)</span>
+                </div>
+                <div class="card-body">
+                    <form id="update-form" class="form-group">
+                        <label for="bearer-token-input">Entra ID Bearer Token (from PowerShell)</label>
+                        <input type="text" id="bearer-token-input" placeholder="Paste eyJhbGciOiJSUzI1Ni... token here" required>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 10px;">
+                            <div>
+                                <label for="update-student-id">Student ID</label>
+                                <input type="number" id="update-student-id" placeholder="Student ID" min="1" required value="1">
+                            </div>
+                            <div>
+                                <label for="update-amount">New Paid (₹)</label>
+                                <input type="number" id="update-amount" placeholder="e.g. 122000" min="0" required value="122000">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="update-btn" class="btn btn-success" style="margin-top: 16px; width: 100%;">
+                            <span class="btn-text">Record Payment</span>
+                        </button>
+                    </form>
+
+                    <div id="update-message" class="toast-box hidden"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- API Log Box -->
+        <section class="card log-section">
+            <div class="card-header">
+                <h2>📊 Live Gateway Telemetry & Logs</h2>
+                <button id="clear-logs" class="btn-text-action">Clear</button>
+            </div>
+            <div class="card-body">
+                <pre id="api-log" class="log-console">// System ready. Make requests above to monitor live APIM responses...</pre>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
